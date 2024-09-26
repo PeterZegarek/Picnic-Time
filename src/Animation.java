@@ -64,14 +64,30 @@ public class Animation extends JPanel {
         Color sky = new Color(135, 206, 235);
         Color grass = new Color(52, 157, 10);
 
+        //Painting the sky
         g2.setPaint(sky);
-
         g2.fillRect(-20, 0, getWidth(), getHeight());
         //g2.setBackground(sky);
 
+        //Painting the grass
         g2.setPaint(grass);
-
         g2.fill(new Rectangle(-20, -20, 40, 20));
+
+        //Painting the lake
+        g2.setPaint(Color.blue);
+        
+        Path2D path = new Path2D.Double();
+
+        path.moveTo(-15, -0.5);
+        path.lineTo(15, -0.5);
+        path.append(new java.awt.geom.Arc2D.Double(-14, -7, 28, 7, 0, 180, java.awt.geom.Arc2D.OPEN), true);
+        //path.moveTo(-15, 0);
+        path.closePath();
+
+        g2.fill(path);
+
+        g2.draw(path);
+
     }
 
     private void drawScene(Graphics2D g2) {
