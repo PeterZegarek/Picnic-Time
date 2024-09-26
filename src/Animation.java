@@ -51,24 +51,67 @@ public class Animation extends JPanel {
         // antialiasing on
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        // fill in area with bue, since that will be our sky
-        drawBackground(g2);
 
-        // g2.setPaint(Color.BLUE);
-        // g2.fillRect(0, 0, getWidth(), getHeight());
+        applyapplyWindowToViewportTransformation(g2, -15, 15, -15, 15, true);
 
         drawScene(g2);
+
+        drawBackground(g2);
     }
 
     private void drawBackground(Graphics2D g2) 
     {
-        g2.setPaint(Color.blue);
+        Color sky = new Color(135, 206, 235);
+        Color grass = new Color(52, 157, 10);
 
-        g2.fillRect(0, 0, getWidth(), getHeight());
+        g2.setPaint(sky);
 
+        g2.fillRect(-20, 0, getWidth(), getHeight());
+        //g2.setBackground(sky);
+
+        g2.setPaint(grass);
+
+        g2.fill(new Rectangle(-20, -20, 40, 20));
     }
 
     private void drawScene(Graphics2D g2) {
         // hello
+        drawTrees(g2);
+    }
+
+    private void drawTrees(Graphics2D g2) {
+        g2.setPaint(Color.GREEN);
+        g2.fill(new Ellipse2D.Double(-12, -2, 2, 2));
+    }
+
+
+
+    private void applyapplyWindowToViewportTransformation(Graphics2D g2,
+                                                          double left, double right, double bottom, double top, 
+                                                          boolean preserveAspect) {
+        int width = getWidth();   // The width of this drawing area, in pixels.
+        int height = getHeight(); // The height of this drawing area, in pixels.
+        if (preserveAspect) {
+            // Adjust the limits to match the aspect ratio of the drawing area.
+            double displayAspect = Math.abs((double)height / width);
+            double requestedAspect = Math.abs(( bottom-top ) / ( right-left ));
+            if (displayAspect > requestedAspect) {
+                // Expand the viewport vertically.
+                double excess = (bottom-top) * (displayAspect/requestedAspect - 1);
+                bottom += excess/2;
+                top -= excess/2;
+            }
+            else if (displayAspect < requestedAspect) {
+                // Expand the viewport vertically.
+                double excess = (right-left) * (requestedAspect/displayAspect - 1);
+                right += excess/2;
+                left -= excess/2;
+            }
+        }
+        g2.scale( width / (right-left), height / (bottom-top) );
+        g2.translate( -left, -top );
+        double pixelWidth = Math.abs(( right - left ) / width);
+        double pixelHeight = Math.abs(( bottom - top ) / height);
+        pixelSize = (float)Math.max(pixelWidth,pixelHeight);
     }
 }
