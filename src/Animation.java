@@ -19,7 +19,7 @@ public class Animation extends JPanel {
         window.setLocation(
                 (screen.width - window.getWidth()) / 2,
                 (screen.height - window.getHeight()) / 2);
-        // set up timer 
+        // set up timer
         Timer animationTimer;
         final long startTime = System.currentTimeMillis();
         animationTimer = new Timer(16, new ActionListener() {
@@ -46,16 +46,26 @@ public class Animation extends JPanel {
     // method to draw contents
     protected void paintComponent(Graphics g) {
         // graphics2D context to draw
-        Graphics2D g2 = (Graphics2D)g.create();
+        Graphics2D g2 = (Graphics2D) g.create();
 
         // antialiasing on
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    
+
         // fill in area with bue, since that will be our sky
-        g2.setPaint(Color.BLUE);
-        g2.fillRect(0,0,getWidth(),getHeight());
+        drawBackground(g2);
+
+        // g2.setPaint(Color.BLUE);
+        // g2.fillRect(0, 0, getWidth(), getHeight());
 
         drawScene(g2);
+    }
+
+    private void drawBackground(Graphics2D g2) 
+    {
+        g2.setPaint(Color.blue);
+
+        g2.fillRect(0, 0, getWidth(), getHeight());
+
     }
 
     private void drawScene(Graphics2D g2) {
