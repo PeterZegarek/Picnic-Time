@@ -40,7 +40,7 @@ public class Animation extends JPanel {
 
     // constructor
     public Animation() {
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(845, 1000));
     }
 
     // method to draw contents
@@ -66,8 +66,16 @@ public class Animation extends JPanel {
     }
 
     private void drawTrees(Graphics2D g2) {
+        // left side tree
         g2.setPaint(Color.GREEN);
-        g2.fill(new Ellipse2D.Double(-12, -2, 2, 2));
+        g2.fill(new Ellipse2D.Double(-16, -5, 7, 7));
+
+        g2.setPaint(Color.RED);
+        g2.fill(new Rectangle(-18, -20, 40, 20));
+
+        // right side tree
+        g2.setPaint(Color.GREEN);
+        g2.fill(new Ellipse2D.Double(9, -5, 7, 7));
     }
 
 
@@ -99,5 +107,6 @@ public class Animation extends JPanel {
         double pixelWidth = Math.abs(( right - left ) / width);
         double pixelHeight = Math.abs(( bottom - top ) / height);
         pixelSize = (float)Math.max(pixelWidth,pixelHeight);
+        System.out.println("left: " + left + ", right: " + right + ", bottom: " + bottom + ", top: " + top);
     }
 }
