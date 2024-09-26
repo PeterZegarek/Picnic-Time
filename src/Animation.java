@@ -67,15 +67,47 @@ public class Animation extends JPanel {
 
     private void drawTrees(Graphics2D g2) {
         // left side tree
-        g2.setPaint(Color.GREEN);
-        g2.fill(new Ellipse2D.Double(-16, -5, 7, 7));
+        // tree trunk
+        Path2D polyLeft = new Path2D.Double();
+        polyLeft.moveTo(-13, -3);
+        polyLeft.lineTo(-14, -12);
+        polyLeft.lineTo(-14.5, -12.5);
+        polyLeft.lineTo(-12.5, -12);
+        polyLeft.lineTo(-11, -13);
+        polyLeft.lineTo(-10, -12);
+        polyLeft.lineTo(-7.5, -12.5);
+        polyLeft.lineTo(-8, -12);
+        polyLeft.lineTo(-9, -3);
+        polyLeft.closePath();
+        // make tree trunk brown
+        g2.setPaint(new Color(150, 75, 0));
+        g2.fill(polyLeft);
 
-        g2.setPaint(Color.RED);
-        g2.fill(new Rectangle(-18, -20, 40, 20));
-
+        // leaves
+        g2.setPaint(Color.decode("#2A7E19"));
+        g2.fill(new Ellipse2D.Double(-15, -5, 8, 8));
+        
         // right side tree
-        g2.setPaint(Color.GREEN);
-        g2.fill(new Ellipse2D.Double(9, -5, 7, 7));
+        // tree trunk
+        Path2D polyRight = new Path2D.Double();
+        polyRight.moveTo(13, -3);
+        polyRight.lineTo(14, -12);
+        polyRight.lineTo(14.5, -12.5);
+        polyRight.lineTo(12.5, -12);
+        polyRight.lineTo(11, -13);
+        polyRight.lineTo(10, -12);
+        polyRight.lineTo(7.5, -12.5);
+        polyRight.lineTo(8, -12);
+        polyRight.lineTo(9, -3);
+        polyRight.closePath();
+        // make tree trunk brown
+        g2.setPaint(new Color(150, 75, 0));
+        g2.fill(polyRight);
+
+        // leaves
+        g2.setPaint(Color.decode("#2A7E19"));
+        g2.fill(new Ellipse2D.Double(7, -5, 8, 8));
+
     }
 
 
@@ -107,6 +139,5 @@ public class Animation extends JPanel {
         double pixelWidth = Math.abs(( right - left ) / width);
         double pixelHeight = Math.abs(( bottom - top ) / height);
         pixelSize = (float)Math.max(pixelWidth,pixelHeight);
-        System.out.println("left: " + left + ", right: " + right + ", bottom: " + bottom + ", top: " + top);
     }
 }
