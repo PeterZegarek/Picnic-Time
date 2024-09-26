@@ -19,7 +19,7 @@ public class Animation extends JPanel {
         window.setLocation(
                 (screen.width - window.getWidth()) / 2,
                 (screen.height - window.getHeight()) / 2);
-        // set up timer 
+        // set up timer
         Timer animationTimer;
         final long startTime = System.currentTimeMillis();
         animationTimer = new Timer(16, new ActionListener() {
@@ -46,18 +46,48 @@ public class Animation extends JPanel {
     // method to draw contents
     protected void paintComponent(Graphics g) {
         // graphics2D context to draw
-        Graphics2D g2 = (Graphics2D)g.create();
+        Graphics2D g2 = (Graphics2D) g.create();
 
         // antialiasing on
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    
-        // fill in area with blue, since that will be our sky
-        g2.setPaint(Color.BLUE);
-        g2.fillRect(0,0,getWidth(),getHeight());
+
 
         applyapplyWindowToViewportTransformation(g2, -15, 15, -15, 15, true);
 
         drawScene(g2);
+
+        drawBackground(g2);
+    }
+
+    private void drawBackground(Graphics2D g2) 
+    {
+        Color sky = new Color(135, 206, 235);
+        Color grass = new Color(52, 157, 10);
+
+        //Painting the sky
+        g2.setPaint(sky);
+        g2.fillRect(-20, 0, getWidth(), getHeight());
+        //g2.setBackground(sky);
+
+        //Painting the grass
+        g2.setPaint(grass);
+        g2.fill(new Rectangle(-20, -20, 40, 20));
+
+        //Painting the lake
+        g2.setPaint(Color.blue);
+        
+        Path2D path = new Path2D.Double();
+
+        path.moveTo(-15, -0.5);
+        path.lineTo(15, -0.5);
+        path.append(new java.awt.geom.Arc2D.Double(-14, -7, 28, 7, 0, 180, java.awt.geom.Arc2D.OPEN), true);
+        //path.moveTo(-15, 0);
+        path.closePath();
+
+        g2.fill(path);
+
+        g2.draw(path);
+
     }
 
     private void drawScene(Graphics2D g2) {
