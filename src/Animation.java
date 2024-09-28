@@ -6,6 +6,11 @@ import java.awt.geom.*;
 import javax.swing.*;
 
 public class Animation extends JPanel {
+
+    private int frameNumber;
+    private long elapsedTimeMillis;
+
+    private float pixelSize;
     public static void main(String[] args) {
         // set up window and default settings for it
         JFrame window;
@@ -33,14 +38,9 @@ public class Animation extends JPanel {
         animationTimer.start();
     }
 
-    private int frameNumber;
-    private long elapsedTimeMillis;
-
-    private float pixelSize;
-
     // constructor
     public Animation() {
-        setPreferredSize(new Dimension(845, 1000));
+        setPreferredSize(new Dimension(750, 750));
     }
 
     // method to draw contents
@@ -54,9 +54,8 @@ public class Animation extends JPanel {
 
         applyapplyWindowToViewportTransformation(g2, -15, 15, -15, 15, true);
 
-        drawScene(g2);
-
         drawBackground(g2);
+        drawScene(g2);
     }
 
     private void drawBackground(Graphics2D g2) 
@@ -67,7 +66,6 @@ public class Animation extends JPanel {
         //Painting the sky
         g2.setPaint(sky);
         g2.fillRect(-20, 0, getWidth(), getHeight());
-        //g2.setBackground(sky);
 
         //Painting the grass
         g2.setPaint(grass);
@@ -80,13 +78,47 @@ public class Animation extends JPanel {
 
         path.moveTo(-15, -0.5);
         path.lineTo(15, -0.5);
-        path.append(new java.awt.geom.Arc2D.Double(-14, -7, 28, 7, 0, 180, java.awt.geom.Arc2D.OPEN), true);
+        path.append(new java.awt.geom.Arc2D.Double(-10, -7, 20,6, 0, 180, java.awt.geom.Arc2D.OPEN), true);
         //path.moveTo(-15, 0);
         path.closePath();
 
         g2.fill(path);
 
         g2.draw(path);
+
+        // draw sun - with fluctuating alpha value
+        int alphaEffect = (int) (Math.cos((Math.toRadians(frameNumber))) * 15);
+        System.out.println(alphaEffect);
+        g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
+        g2.fill(new Ellipse2D.Double(3.5, 10.25, 10, 10));
+        g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
+        g2.fill(new Ellipse2D.Double(4, 11, 9, 9));
+        g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
+        g2.fill(new Ellipse2D.Double(4.5, 11.75, 8, 8));
+        g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
+        g2.fill(new Ellipse2D.Double(5, 12.5, 7, 7));
+        g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
+        g2.fill(new Ellipse2D.Double(5.5, 13.25, 6, 6));
+        
+
+        // draw a dot at each coordinate
+        // useful tool to flick on/off
+        // g2.setPaint(Color.BLACK);
+        // for (int i = 0; i <= 30; i++) {
+        //     for (int j = 0; j <= 30; j++) {
+        //         if (j == 15) {
+        //             g2.setPaint(Color.GRAY);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         } else if (i == 15){
+        //             g2.setPaint(Color.WHITE);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         } else {
+        //             g2.setPaint(Color.BLACK);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         }
+                
+        //     }
+        // }
 
     }
 
@@ -99,15 +131,15 @@ public class Animation extends JPanel {
         // left side tree
         // tree trunk
         Path2D polyLeft = new Path2D.Double();
-        polyLeft.moveTo(-13, -3);
-        polyLeft.lineTo(-14, -12);
-        polyLeft.lineTo(-14.5, -12.5);
+        polyLeft.moveTo(-12, -3);
+        polyLeft.lineTo(-13, -12);
+        polyLeft.lineTo(-13.5, -12.5);
         polyLeft.lineTo(-12.5, -12);
         polyLeft.lineTo(-11, -13);
         polyLeft.lineTo(-10, -12);
-        polyLeft.lineTo(-7.5, -12.5);
-        polyLeft.lineTo(-8, -12);
-        polyLeft.lineTo(-9, -3);
+        polyLeft.lineTo(-8.5, -12.5);
+        polyLeft.lineTo(-9, -12);
+        polyLeft.lineTo(-10, -3);
         polyLeft.closePath();
         // make tree trunk brown
         g2.setPaint(new Color(150, 75, 0));
@@ -115,20 +147,20 @@ public class Animation extends JPanel {
 
         // leaves
         g2.setPaint(Color.decode("#2A7E19"));
-        g2.fill(new Ellipse2D.Double(-15, -5, 8, 8));
+        g2.fill(new Ellipse2D.Double(-14.85, -5, 7.8, 7.8));
         
         // right side tree
         // tree trunk
         Path2D polyRight = new Path2D.Double();
-        polyRight.moveTo(13, -3);
-        polyRight.lineTo(14, -12);
-        polyRight.lineTo(14.5, -12.5);
+        polyRight.moveTo(12, -3);
+        polyRight.lineTo(13, -12);
+        polyRight.lineTo(13.5, -12.5);
         polyRight.lineTo(12.5, -12);
         polyRight.lineTo(11, -13);
         polyRight.lineTo(10, -12);
-        polyRight.lineTo(7.5, -12.5);
-        polyRight.lineTo(8, -12);
-        polyRight.lineTo(9, -3);
+        polyRight.lineTo(8.5, -12.5);
+        polyRight.lineTo(9, -12);
+        polyRight.lineTo(10, -3);
         polyRight.closePath();
         // make tree trunk brown
         g2.setPaint(new Color(150, 75, 0));
@@ -136,7 +168,7 @@ public class Animation extends JPanel {
 
         // leaves
         g2.setPaint(Color.decode("#2A7E19"));
-        g2.fill(new Ellipse2D.Double(7, -5, 8, 8));
+        g2.fill(new Ellipse2D.Double(7.15, -5, 7.8, 7.8));
 
     }
 
