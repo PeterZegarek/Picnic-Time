@@ -109,6 +109,15 @@ public class Animation extends JPanel {
         Line2D.Double body = new Line2D.Double(7.1, -9.3, 6, -11);
         g2.draw(body);
 
+        Line2D.Double arm = new Line2D.Double(6.9, -9.6, 5.8, -9.6);
+        g2.draw(arm);
+
+        Line2D.Double knee = new Line2D.Double(6, -11, 5.3, -10.9);
+        g2.draw(knee);
+
+        Line2D.Double leg = new Line2D.Double(5.3, -10.9, 5.2, -11.4);
+        g2.draw(leg);
+
         g2.setStroke(originalStroke);
     }
 
@@ -157,22 +166,22 @@ public class Animation extends JPanel {
 
         // draw a dot at each coordinate
         // useful tool to flick on/off
-        // g2.setPaint(Color.BLACK);
-        // for (int i = 0; i <= 30; i++) {
-        //     for (int j = 0; j <= 30; j++) {
-        //         if (j == 15) {
-        //             g2.setPaint(Color.GRAY);
-        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-        //         } else if (i == 15){
-        //             g2.setPaint(Color.WHITE);
-        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-        //         } else {
-        //             g2.setPaint(Color.BLACK);
-        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-        //         }
+        g2.setPaint(Color.BLACK);
+        for (int i = 0; i <= 30; i++) {
+            for (int j = 0; j <= 30; j++) {
+                if (j == 15) {
+                    g2.setPaint(Color.GRAY);
+                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+                } else if (i == 15){
+                    g2.setPaint(Color.WHITE);
+                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+                } else {
+                    g2.setPaint(Color.BLACK);
+                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+                }
                 
-        //     }
-        // }
+            }
+        }
 
     }
 
