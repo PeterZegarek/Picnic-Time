@@ -106,6 +106,8 @@ public class Animation extends JPanel {
         g2.setColor(Color.BLACK);
         g2.draw(personHead);
 
+        Line2D.Double body = new Line2D.Double(7.1, -9.3, 6, -11);
+        g2.draw(body);
 
         g2.setStroke(originalStroke);
     }
