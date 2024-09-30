@@ -55,7 +55,59 @@ public class Animation extends JPanel {
         applyapplyWindowToViewportTransformation(g2, -15, 15, -15, 15, true);
 
         drawBackground(g2);
+        drawPicnic(g2);
         drawScene(g2);
+    }
+
+
+    private void drawPicnic(Graphics2D g2)
+    {
+        AffineTransform original = g2.getTransform();
+        Stroke originalStroke = g2.getStroke();
+
+
+
+        Color tan = new Color(214,181,136);
+
+        g2.setPaint(tan);
+
+       
+        Rectangle picnic = new Rectangle(13, -12, 4, 5);
+        g2.shear(0.9, 0.0);
+        g2.fill(picnic);   
+        
+        g2.setTransform(original);
+
+        Color brown = new Color(101, 79, 70);
+
+        Rectangle2D.Double suitcase = new Rectangle2D.Double(7.5, -7.5, 2, 1.3);
+        Arc2D.Double suitcaseArc = new Arc2D.Double(7.8, -6.4, 1.3, 0.5, 0, -180, Arc2D.OPEN);
+
+        //Rectangle suitcase = new Rectangle(7, -7, 2, 1);
+        g2.setPaint(brown);
+        g2.fill(suitcase);
+
+        g2.setStroke(new BasicStroke(0.1f));
+
+        g2.setPaint(brown);
+        g2.draw(suitcaseArc);
+        //g2.fill(suitcaseArc);
+
+        
+
+
+        g2.setColor(Color.RED);
+        Ellipse2D apple = new Ellipse2D.Double(6, -8.5, 0.3, 0.3);
+        g2.fill(apple);
+
+        g2.setColor(Color.WHITE);
+        Ellipse2D.Double personHead = new Ellipse2D.Double(6.7, -9.4, 1.5, 1.5);
+        g2.fill(personHead);
+        g2.setColor(Color.BLACK);
+        g2.draw(personHead);
+
+
+        g2.setStroke(originalStroke);
     }
 
     private void drawBackground(Graphics2D g2) 
@@ -88,7 +140,7 @@ public class Animation extends JPanel {
 
         // draw sun - with fluctuating alpha value
         int alphaEffect = (int) (Math.cos((Math.toRadians(frameNumber))) * 15);
-        System.out.println(alphaEffect);
+        //System.out.println(alphaEffect);
         g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
         g2.fill(new Ellipse2D.Double(3.5, 10.25, 10, 10));
         g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
