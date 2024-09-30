@@ -57,8 +57,33 @@ public class Animation extends JPanel {
         drawBackground(g2);
         drawPicnic(g2);
         drawScene(g2);
+        drawSeeSaw(g2);
     }
 
+    private void drawSeeSaw(Graphics2D g2)
+    {
+        g2.setPaint(Color.PINK);
+
+        Polygon triangle = new Polygon();
+        triangle.addPoint(-5, -10);
+        triangle.addPoint(-7, -12);
+        triangle.addPoint(-3, -12);
+
+        g2.fill(triangle);
+
+        double seesawX = -11;
+        double seesawY = -10;
+        double width = 12;
+        double height = 0.3;
+    
+
+        g2.rotate(Math.toRadians(-30), seesawX + width / 2, seesawY + height / 2);
+
+        Rectangle2D.Double seesaw = new Rectangle2D.Double(seesawX, seesawY, width, height);
+
+        g2.fill(seesaw);
+       
+    }
 
     private void drawPicnic(Graphics2D g2)
     {
