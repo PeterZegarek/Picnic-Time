@@ -87,6 +87,7 @@ public class Animation extends JPanel {
         g2.setPaint(purple);
 
         int frame = (int) (Math.sin((Math.toRadians(anTimer))) * 20);
+        System.out.println(frame);
         g2.rotate(Math.toRadians(frame), seesawX + width / 2, seesawY + height / 2);
 
         Rectangle2D.Double seesaw = new Rectangle2D.Double(seesawX, seesawY, width, height);
@@ -101,6 +102,9 @@ public class Animation extends JPanel {
         g2.setColor(Color.BLACK);
         g2.draw(person1Head);
 
+        // variable that will modify the knee bend of the people
+        double modifiedFrame = frame / 30.0;
+
         Line2D.Double firstBody = new Line2D.Double(-9.4, -8, -9.4, -10);
         g2.draw(firstBody);
 
@@ -110,11 +114,17 @@ public class Animation extends JPanel {
         Line2D.Double firstArm2 = new Line2D.Double(-9.4, -9, -8.3, -8.5);
         g2.draw(firstArm2);
 
-        Line2D.Double firstKnee = new Line2D.Double(-9.4, -10, -8.7, -10.9);
-        g2.draw(firstKnee);
-
-        Line2D.Double firstLeg = new Line2D.Double(-8.7, -10.9, -9.5, -11.8);
+        if (modifiedFrame > 0) {
+            Line2D.Double firstKnee = new Line2D.Double(-9.4, -10, -8.7 + modifiedFrame, -10.9);
+            g2.draw(firstKnee);
+            Line2D.Double firstLeg = new Line2D.Double(-8.7 + modifiedFrame, -10.9, -9.5, -11.8);
         g2.draw(firstLeg);
+        } else {
+            Line2D.Double firstKnee = new Line2D.Double(-9.4, -10, -8.7, -10.9);
+            g2.draw(firstKnee);
+            Line2D.Double firstLeg = new Line2D.Double(-8.7, -10.9, -9.5, -11.8);
+            g2.draw(firstLeg);
+        }
 
         g2.setStroke(new BasicStroke(0.1f));
         g2.setColor(Color.WHITE);
@@ -132,11 +142,18 @@ public class Animation extends JPanel {
         Line2D.Double secondArm2 = new Line2D.Double(-1.4, -9, -.3, -8.5);
         g2.draw(secondArm2);
 
-        Line2D.Double secondKnee = new Line2D.Double(-1.4, -10, -2.1, -10.9);
-        g2.draw(secondKnee);
-
-        Line2D.Double secondLeg = new Line2D.Double(-2.1, -10.9, -1.5, -11.8);
-        g2.draw(secondLeg);
+        if (modifiedFrame < 0) {
+            Line2D.Double secondKnee = new Line2D.Double(-1.4, -10, -2.1 + modifiedFrame, -10.9);
+            g2.draw(secondKnee);
+            Line2D.Double secondLeg = new Line2D.Double(-2.1 + modifiedFrame, -10.9, -1.5, -11.8);
+            g2.draw(secondLeg);
+        } else {
+            Line2D.Double secondKnee = new Line2D.Double(-1.4, -10, -2.1, -10.9);
+            g2.draw(secondKnee);
+            Line2D.Double secondLeg = new Line2D.Double(-2.1, -10.9, -1.5, -11.8);
+            g2.draw(secondLeg);
+        }
+        
 
 
         g2.setStroke(originalStroke);
