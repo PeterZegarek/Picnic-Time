@@ -54,9 +54,10 @@ public class Animation extends JPanel {
         // antialiasing on
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-
+        // set coordinate plane
         applyapplyWindowToViewportTransformation(g2, -15, 15, -15, 15, true);
 
+        // draw different parts of scene
         drawBackground(g2);
         drawPicnic(g2);
         drawScene(g2);
@@ -65,6 +66,7 @@ public class Animation extends JPanel {
 
     private void drawSeeSaw(Graphics2D g2)
     {
+        Stroke originalStroke = g2.getStroke();
         g2.setPaint(Color.GRAY);
 
         Polygon triangle = new Polygon();
@@ -91,6 +93,53 @@ public class Animation extends JPanel {
 
         g2.fill(seesaw);
        
+        // make left person on seesaw
+        g2.setStroke(new BasicStroke(0.1f));
+        g2.setColor(Color.WHITE);
+        Ellipse2D.Double person1Head = new Ellipse2D.Double(-10, -8, 1.5, 1.5);
+        g2.fill(person1Head);
+        g2.setColor(Color.BLACK);
+        g2.draw(person1Head);
+
+        Line2D.Double firstBody = new Line2D.Double(-9.4, -8, -9.4, -10);
+        g2.draw(firstBody);
+
+        Line2D.Double firstArm1 = new Line2D.Double(-9.4, -9, -10.5, -8.5);
+        g2.draw(firstArm1);
+
+        Line2D.Double firstArm2 = new Line2D.Double(-9.4, -9, -8.3, -8.5);
+        g2.draw(firstArm2);
+
+        Line2D.Double firstKnee = new Line2D.Double(-9.4, -10, -8.7, -10.9);
+        g2.draw(firstKnee);
+
+        Line2D.Double firstLeg = new Line2D.Double(-8.7, -10.9, -9.5, -11.8);
+        g2.draw(firstLeg);
+
+        g2.setStroke(new BasicStroke(0.1f));
+        g2.setColor(Color.WHITE);
+        Ellipse2D.Double person2Head = new Ellipse2D.Double(-2, -8, 1.5, 1.5);
+        g2.fill(person2Head);
+        g2.setColor(Color.BLACK);
+        g2.draw(person2Head);
+
+        Line2D.Double secondBody = new Line2D.Double(-1.4, -8, -1.4, -10);
+        g2.draw(secondBody);
+
+        Line2D.Double secondArm1 = new Line2D.Double(-1.4, -9, -2.5, -8.5);
+        g2.draw(secondArm1);
+
+        Line2D.Double secondArm2 = new Line2D.Double(-1.4, -9, -.3, -8.5);
+        g2.draw(secondArm2);
+
+        Line2D.Double secondKnee = new Line2D.Double(-1.4, -10, -2.1, -10.9);
+        g2.draw(secondKnee);
+
+        Line2D.Double secondLeg = new Line2D.Double(-2.1, -10.9, -1.5, -11.8);
+        g2.draw(secondLeg);
+
+
+        g2.setStroke(originalStroke);
     }
 
     private void drawPicnic(Graphics2D g2)
