@@ -12,68 +12,103 @@
     var canvas = document.getElementById('myCanvas');
     var canv = canvas.getContext('2d');
     //Background
-    canv.fillStyle = "#0eabfa";
-    canv.fillRect(0, 0, canvas.width, canvas.height);
+    {
+        canv.save();
+        canv.fillStyle = "#0eabfa";
+        canv.fillRect(0, 0, canvas.width, canvas.height);
+        canv.restore();
+    }
     //Grass
-    canv.beginPath();
-    canv.fillStyle = "#4bfa0e";
-    canv.fillRect(0, 250, canvas.width, 250);
-    canv.closePath();
+    {
+        canv.save();
+        canv.beginPath();
+        canv.fillStyle = "#4bfa0e";
+        canv.translate(0, 250);
+        canv.fillRect(0, 0, canvas.width, 250);
+        canv.closePath();
+        canv.restore();
+    }
     //Water
-    canv.beginPath();
-    canv.ellipse(250, 250, 190, 120, 0, 0, Math.PI);
-    canv.fillStyle = 'Blue';
-    canv.fill();
-    canv.closePath();
+    {
+        canv.save();
+        canv.beginPath();
+        canv.translate(250, 250)
+        canv.ellipse(0, 0, 190, 120, 0, 0, Math.PI);
+        canv.fillStyle = 'Blue';
+        canv.fill();
+        canv.closePath();
+        canv.restore();
+    }
     //Tree Leaves
-    canv.beginPath();
-    canv.arc(75, 200, 80, 0, Math.PI * 2);
-    canv.arc(425, 200, 80, 0, Math.PI * 2); 
-    canv.fillStyle = 'green';
-    canv.fill();
-    canv.closePath();
+    {
+        canv.save();
+        canv.beginPath();
+        canv.arc(75, 200, 80, 0, Math.PI * 2);
+        canv.translate(350, 0);
+        canv.arc(75, 200, 80, 0, Math.PI * 2); 
+        canv.fillStyle = 'green';
+        canv.fill();
+        canv.closePath();
+        canv.restore();
+    }
     //Sun, changing opacity as it grows
-    canv.beginPath();
-    canv.arc(350, 0, 30, 0, Math.PI * 2);
-    canv.fillStyle = 'yellow';
-    canv.fill();
-    canv.closePath();
-    canv.beginPath();
-    canv.arc(350, 0, 40, 0, Math.PI * 2);
-    canv.fillStyle = 'rgba(255, 255, 0, 0.8)';
-    canv.fill();
-    canv.closePath();
-    canv.beginPath();
-    canv.arc(350, 0, 50, 0, Math.PI * 2);
-    canv.fillStyle = 'rgba(255, 255, 0, 0.6)';
-    canv.fill();
-    canv.closePath();
-    canv.beginPath();
-    canv.arc(350, 0, 60, 0, Math.PI * 2);
-    canv.fillStyle = 'rgba(255, 255, 0, 0.4)';
-    canv.fill();
-    canv.closePath();
-    canv.beginPath();
-    canv.arc(350, 0, 70, 0, Math.PI * 2);
-    canv.fillStyle = 'rgba(255, 255, 0, 0.2)';
-    canv.fill();
-    canv.closePath();
+    {
+        canv.save();
+        canv.beginPath();
+        canv.arc(350, 0, 30, 0, Math.PI * 2);
+        canv.fillStyle = 'yellow';
+        canv.fill();
+        canv.closePath();
+        canv.beginPath();
+        canv.arc(350, 0, 30, 0, Math.PI * 2);
+        canv.fillStyle = 'rgba(255, 255, 0, 0.8)';
+        canv.scale(1.3, 1.3);
+        canv.translate(-81, 0);
+        canv.fill();
+        canv.closePath();
+        canv.beginPath();
+        canv.arc(350, 0, 30, 0, Math.PI * 2);
+        canv.fillStyle = 'rgba(255, 255, 0, 0.6)';
+        canv.scale(1.3, 1.3);
+        canv.translate(-81, 0);
+        canv.fill();
+        canv.closePath();
+        canv.beginPath();
+        canv.arc(350, 0, 30, 0, Math.PI * 2);
+        canv.fillStyle = 'rgba(255, 255, 0, 0.4)';
+        canv.scale(1.3, 1.3);
+        canv.translate(-81, 0);
+        canv.fill();
+        canv.closePath();
+        canv.beginPath();
+        canv.arc(350, 0, 30, 0, Math.PI * 2);
+        canv.fillStyle = 'rgba(255, 255, 0, 0.2)';
+        canv.scale(1.3, 1.3);
+        canv.translate(-81, 0);
+        canv.fill();
+        canv.closePath();
+        canv.restore();
+    }
     //Bird
-    canv.beginPath();
-    canv.lineWidth = 5;
-    canv.arc(270, 150, 5, 0, 135, 180, false);
-    canv.fillStyle = '#0eabfa';
-    canv.stroke();
-    canv.fill();
-    canv.closePath();
-    canv.beginPath();
-    canv.lineWidth = 5;
-    canv.arc(284, 150, 5, 0, 135, 180, false);
-    canv.fillStyle = '#0eabfa';
-    canv.stroke();
-    canv.fill();
-    canv.closePath();
-    
-  </script>
+    {
+        canv.save();
+        canv.beginPath();
+        canv.lineWidth = 5;
+        canv.arc(270, 150, 5, 0, 135, 180, false);
+        canv.fillStyle = '#0eabfa';
+        canv.stroke();
+        canv.fill();
+        canv.closePath();
+        canv.beginPath();
+        canv.lineWidth = 5;
+        canv.translate(14,0);
+        canv.arc(270, 150, 5, 0, 135, 180, false);
+        canv.fillStyle = '#0eabfa';
+        canv.stroke();
+        canv.fill();
+        canv.closePath();
+        canv.restore(); 
+    }
+    </script>
 </body>
 </html>
