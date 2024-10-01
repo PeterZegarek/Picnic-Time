@@ -98,16 +98,13 @@ public class Animation extends JPanel {
         AffineTransform original = g2.getTransform();
         Stroke originalStroke = g2.getStroke();
 
-
-
         Color tan = new Color(214,181,136);
 
         g2.setPaint(tan);
-
        
         Rectangle picnic = new Rectangle(13, -12, 4, 5);
         g2.shear(0.9, 0.0);
-        g2.fill(picnic);   
+        g2.fill(picnic);
         
         g2.setTransform(original);
 
@@ -116,7 +113,6 @@ public class Animation extends JPanel {
         Rectangle2D.Double suitcase = new Rectangle2D.Double(7.5, -7.5, 2, 1.3);
         Arc2D.Double suitcaseArc = new Arc2D.Double(7.8, -6.4, 1.3, 0.5, 0, -180, Arc2D.OPEN);
 
-        //Rectangle suitcase = new Rectangle(7, -7, 2, 1);
         g2.setPaint(brown);
         g2.fill(suitcase);
 
@@ -124,10 +120,6 @@ public class Animation extends JPanel {
 
         g2.setPaint(brown);
         g2.draw(suitcaseArc);
-        //g2.fill(suitcaseArc);
-
-        
-
 
         g2.setColor(Color.RED);
         Ellipse2D apple = new Ellipse2D.Double(6, -8.5, 0.3, 0.3);
@@ -171,11 +163,9 @@ public class Animation extends JPanel {
         g2.setPaint(Color.blue);
         
         Path2D path = new Path2D.Double();
-
         path.moveTo(-15, -0.5);
         path.lineTo(15, -0.5);
         path.append(new java.awt.geom.Arc2D.Double(-10, -7, 20,6, 0, 180, java.awt.geom.Arc2D.OPEN), true);
-        //path.moveTo(-15, 0);
         path.closePath();
 
         g2.fill(path);
@@ -183,7 +173,7 @@ public class Animation extends JPanel {
         g2.draw(path);
 
         // draw sun - with fluctuating alpha value
-        int alphaEffect = (int) (Math.cos((Math.toRadians(frameNumber))) * 15);
+        int alphaEffect = (int) (Math.cos((Math.toRadians(frameNumber))) * 25);
         //System.out.println(alphaEffect);
         g2.setPaint(new Color(255, 255, 0, 70 + alphaEffect));
         g2.fill(new Ellipse2D.Double(3.5, 10.25, 10, 10));
@@ -219,8 +209,27 @@ public class Animation extends JPanel {
     }
 
     private void drawScene(Graphics2D g2) {
-        // hello
         drawTrees(g2);
+        drawBird(g2);
+    }
+
+    private void drawBird(Graphics2D g2) {
+
+        Stroke originalStroke = g2.getStroke();
+
+        Path2D bird = new Path2D.Double();
+        // value that the wings will flap with
+        double flapValue = (Math.cos((Math.toRadians(frameNumber * 8)))) / 2;
+        // value affected by the frame number of the movement of the bird - resets every 600 frames
+        double frameMovement = (frameNumber % 600) / 40.0;
+        // drawing the bird
+        bird.moveTo(7 - frameMovement, 7);
+        bird.curveTo(9 - frameMovement, 7 + flapValue, 7 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
+        // bird.curveTo(8.8 - frameMovement, 7 + flapValue, 8.8 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
+        g2.setPaint(Color.BLACK);
+        g2.setStroke(new BasicStroke(0.1f));
+        g2.draw(bird);
+        g2.setStroke(originalStroke);
     }
 
     private void drawTrees(Graphics2D g2) {
