@@ -10,6 +10,8 @@ public class Animation extends JPanel {
     private int frameNumber;
     private long elapsedTimeMillis;
 
+    private int anTimer;
+
     private float pixelSize;
     public static void main(String[] args) {
         // set up window and default settings for it
@@ -30,6 +32,7 @@ public class Animation extends JPanel {
         animationTimer = new Timer(16, new ActionListener() {
             public void actionPerformed(ActionEvent arg0) {
                 panel.frameNumber++;
+                panel.anTimer += 2;
                 panel.elapsedTimeMillis = System.currentTimeMillis() - startTime;
                 panel.repaint();
             }
@@ -62,7 +65,7 @@ public class Animation extends JPanel {
 
     private void drawSeeSaw(Graphics2D g2)
     {
-        g2.setPaint(Color.PINK);
+        g2.setPaint(Color.GRAY);
 
         Polygon triangle = new Polygon();
         triangle.addPoint(-5, -10);
@@ -77,7 +80,12 @@ public class Animation extends JPanel {
         double height = 0.3;
     
 
-        g2.rotate(Math.toRadians(-30), seesawX + width / 2, seesawY + height / 2);
+
+        Color purple = new Color(204, 108, 231);
+        g2.setPaint(purple);
+
+        int frame = (int) (Math.sin((Math.toRadians(anTimer))) * 20);
+        g2.rotate(Math.toRadians(frame), seesawX + width / 2, seesawY + height / 2);
 
         Rectangle2D.Double seesaw = new Rectangle2D.Double(seesawX, seesawY, width, height);
 
@@ -191,22 +199,22 @@ public class Animation extends JPanel {
 
         // draw a dot at each coordinate
         // useful tool to flick on/off
-        g2.setPaint(Color.BLACK);
-        for (int i = 0; i <= 30; i++) {
-            for (int j = 0; j <= 30; j++) {
-                if (j == 15) {
-                    g2.setPaint(Color.GRAY);
-                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-                } else if (i == 15){
-                    g2.setPaint(Color.WHITE);
-                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-                } else {
-                    g2.setPaint(Color.BLACK);
-                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-                }
+        // g2.setPaint(Color.BLACK);
+        // for (int i = 0; i <= 30; i++) {
+        //     for (int j = 0; j <= 30; j++) {
+        //         if (j == 15) {
+        //             g2.setPaint(Color.GRAY);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         } else if (i == 15){
+        //             g2.setPaint(Color.WHITE);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         } else {
+        //             g2.setPaint(Color.BLACK);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         }
                 
-            }
-        }
+        //     }
+        // }
 
     }
 
