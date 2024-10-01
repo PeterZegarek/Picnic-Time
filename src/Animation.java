@@ -156,22 +156,22 @@ public class Animation extends JPanel {
 
         // draw a dot at each coordinate
         // useful tool to flick on/off
-        g2.setPaint(Color.BLACK);
-        for (int i = 0; i <= 30; i++) {
-            for (int j = 0; j <= 30; j++) {
-                if (j == 15) {
-                    g2.setPaint(Color.GRAY);
-                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-                } else if (i == 15){
-                    g2.setPaint(Color.WHITE);
-                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-                } else {
-                    g2.setPaint(Color.BLACK);
-                    g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
-                }
+        // g2.setPaint(Color.BLACK);
+        // for (int i = 0; i <= 30; i++) {
+        //     for (int j = 0; j <= 30; j++) {
+        //         if (j == 15) {
+        //             g2.setPaint(Color.GRAY);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         } else if (i == 15){
+        //             g2.setPaint(Color.WHITE);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         } else {
+        //             g2.setPaint(Color.BLACK);
+        //             g2.fill(new Ellipse2D.Double(i-15, j-15, .5, .5));
+        //         }
                 
-            }
-        }
+        //     }
+        // }
 
     }
 
@@ -188,11 +188,11 @@ public class Animation extends JPanel {
         // value that the wings will flap with
         double flapValue = (Math.cos((Math.toRadians(frameNumber * 8)))) / 2;
         // value affected by the frame number of the movement of the bird - resets every 600 frames
-        double frameMovement = (frameNumber % 600) / 100.0;
+        double frameMovement = (frameNumber % 600) / 40.0;
         // drawing the bird
         bird.moveTo(7 - frameMovement, 7);
-        bird.curveTo(7.2 - frameMovement, 7 + flapValue, 7.2 - frameMovement, 7 + flapValue, 8 - frameMovement, 7);
-        bird.curveTo(8.8 - frameMovement, 7 + flapValue, 8.8 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
+        bird.curveTo(9 - frameMovement, 7 + flapValue, 7 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
+        // bird.curveTo(8.8 - frameMovement, 7 + flapValue, 8.8 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
         g2.setPaint(Color.BLACK);
         g2.setStroke(new BasicStroke(0.1f));
         g2.draw(bird);
