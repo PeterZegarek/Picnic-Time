@@ -258,7 +258,6 @@ public class Animation extends JPanel {
         // drawing the bird
         bird.moveTo(7 - frameMovement, 7);
         bird.curveTo(9 - frameMovement, 7 + flapValue, 7 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
-        // bird.curveTo(8.8 - frameMovement, 7 + flapValue, 8.8 - frameMovement, 7 + flapValue, 9 - frameMovement, 7);
         g2.setPaint(Color.BLACK);
         g2.setStroke(new BasicStroke(0.1f));
         g2.draw(bird);
@@ -309,8 +308,6 @@ public class Animation extends JPanel {
         g2.fill(new Ellipse2D.Double(7.15, -5, 7.8, 7.8));
 
     }
-
-
 
     private void applyapplyWindowToViewportTransformation(Graphics2D g2,
                                                           double left, double right, double bottom, double top, 
